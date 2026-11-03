@@ -1,41 +1,172 @@
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
-<!--  If necessary, please modify the charset parameter to specify the        -->
-<!--  character set of your HTML page.                                        -->
-<!--  ----------------------------------------------------------------------  -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+ function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+</script>
 
-<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+    <title>Service Referral Form</title>
+    <style>
+        /* SET DEFAULT FONT FOR THE WHOLE PAGE */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333333;
+            padding: 40px 20px;
+            margin: 0;
+        }
 
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: Please add the following <FORM> element to your page.             -->
-<!--  ----------------------------------------------------------------------  -->
+        /* Form Container Box */
+        .referral-form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
 
-<form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D0Y000000M4k8" method="POST">
+        .form-header {
+            margin-bottom: 25px;
+            text-align: center;
+        }
 
-<input type=hidden name="orgid" value="00D0Y000000M4k8">
-<input type=hidden name="retURL" value="https://www.staywellservices.org.uk/">
+        .form-header h2 {
+            margin: 0 0 8px 0;
+            color: #0070d2;
+        }
 
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
-<!--  these lines if you wish to test in debug mode.                          -->
-<!--  <input type="hidden" name="debug" value=1>                              -->
-<!--  <input type="hidden" name="debugEmail"                                  -->
-<!--  value="nick.phillips@staywellservices.org.uk">                          -->
-<!--  ----------------------------------------------------------------------  -->
+        .form-header p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
 
-<label for="name">Contact Name</label><input  id="name" maxlength="80" name="name" size="20" type="text" /><br>
+        /* Form Row Wrapper */
+        .form-row {
+            margin-bottom: 20px;
+        }
 
-<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
+        /* DEFAULT MARGINS FOR FIELD LABELS */
+        .referral-form-container label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #2b2b2b;
+        }
+
+        /* DEFAULT MARGINS & STYLING FOR INPUT BOXES */
+        .referral-form-container input[type="text"],
+        .referral-form-container input[type="email"],
+        .referral-form-container textarea,
+        .referral-form-container select {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 15px;
+            border: 1px solid #a8b7c7;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 0;
+            background-color: #fff;
+        }
+
+        /* Input Focus State */
+        .referral-form-container input:focus,
+        .referral-form-container select:focus,
+        .referral-form-container textarea:focus {
+            border-color: #0070d2;
+            outline: none;
+            box-shadow: 0 0 4px rgba(0, 112, 210, 0.3);
+        }
+
+        /* 2. RECAPTCHA LAYOUT STYLING */
+        .recaptcha-row {
+            margin: 25px 0;
+            display: flex;
+            justify-content: center; /* Centres the widget inside the form container */
+        }
+
+        /* Submit Button Styling */
+        .submit-btn {
+            background-color: #0070d2;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #005fb2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="referral-form-container">
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D0Y000000M4k8" method="POST">
+        
+        <input type=hidden name='captcha_settings' value='{"keyname":"GitHubDotIO","fallback":"true","orgId":"00D0Y000000M4k8","ts":""}'>
+	<input type=hidden name="oid" value="00D0Y000000M4k8">
+	<input type=hidden name="retURL" value="https://www.staywellservices.org.uk">
+
+        <!-- Example of how to wrap your Salesforce fields inside the styled rows -->
+        <!-- <div class="form-row"> -->
+        <!-- <label for="first_name">Client First Name</label> -->
+        <!-- <input id="first_name" maxlength="40" name="first_name" size="20" type="text" /> -->
+        <!-- </div> -->
+
+<div class="form-header">
+<label>Patient's Details / Consent to Contact</label>
+</div>
+
+<label for="salutation">Salutation</label><select  id="salutation" name="salutation"><option value="">--None--</option><option value="Mr">Mr</option>
+<option value="Mrs">Mrs</option>
+<option value="Ms">Ms</option>
+<option value="Miss">Miss</option>
+<option value="Dr">Dr</option>
+<option value="Rev">Rev</option>
+<option value="Lady">Lady</option>
+<option value="Lord">Lord</option>
+<option value="Prof">Prof</option>
+<option value="Sir">Sir</option>
+<option value="Mx">Mx</option>
+</select><br>
+
+<label for="first_name">First Name</label><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br>
+
+<label for="last_name">Last Name</label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br>
+
+<label for="company">Company</label><input  id="company" maxlength="40" name="company" size="20" type="text" /><br>
 
 <label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
 
-<label for="description">Description</label><textarea name="description"></textarea><br>
+<label for="mobile">Mobile</label><input  id="mobile" maxlength="40" name="mobile" size="20" type="text" /><br>
 
-<label for="subject">Subject</label><input  id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
+<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
 
-Name of Referrer from Referring Org:<input  id="00N1v00000TRSxL" maxlength="255" name="00N1v00000TRSxL" size="20" type="text" /><br>
+<label for="street">Street</label><textarea name="street"></textarea><br>
 
-Service:<select  id="00N0Y00000QwaeR" name="00N0Y00000QwaeR" title="Service"><option value="">--None--</option><option value="Day Centres">Day Centres</option>
+<label for="city">City</label><input  id="city" maxlength="40" name="city" size="20" type="text" /><br>
+
+<label for="state">State/Province</label><input  id="state" maxlength="20" name="state" size="20" type="text" /><br>
+
+<label for="zip">Zip</label><input  id="zip" maxlength="20" name="zip" size="20" type="text" /><br>
+
+Preferred Phone:<select  id="00N0Y000004YzI2" name="00N0Y000004YzI2" title="Preferred Phone"><option value="">--None--</option><option value="Home">Home</option>
+<option value="Work">Work</option>
+<option value="Mobile">Mobile</option>
+<option value="Other">Other</option>
+</select><br>
+
+Service:<select  id="00N0Y00000QwaeU" name="00N0Y00000QwaeU" title="Service"><option value="">--None--</option><option value="Day Centres">Day Centres</option>
 <option value="Help@Home">Help@Home</option>
 <option value="Community Team">Community Team</option>
 <option value="Community Connectors">Community Connectors</option>
@@ -53,9 +184,7 @@ Service:<select  id="00N0Y00000QwaeR" name="00N0Y00000QwaeR" title="Service"><op
 <option value="House clearance / Deep clean">House clearance / Deep clean</option>
 </select><br>
 
-Received Date:<span class="dateInput dateOnlyInput"><input  id="00N1v00000SjmyG" name="00N1v00000SjmyG" size="12" type="text" /></span><br>
-
-How did the Referrer hear of service?:<select  id="00N0Y00000S1cUa" name="00N0Y00000S1cUa" title="How did the Referrer hear of service?"><option value="">--None--</option><option value="Staywell website">Staywell website</option>
+How did the Referrer hear of service?:<select  id="00N0Y00000Ryl5Y" name="00N0Y00000Ryl5Y" title="How did the Referrer hear of service?"><option value="">--None--</option><option value="Staywell website">Staywell website</option>
 <option value="Other website">Other website</option>
 <option value="Other Staywell service">Other Staywell service</option>
 <option value="Social media">Social media</option>
@@ -68,14 +197,152 @@ How did the Referrer hear of service?:<select  id="00N0Y00000S1cUa" name="00N0Y0
 <option value="Other organisation">Other organisation</option>
 </select><br>
 
-<label for="status">Status</label><select  id="status" name="status"><option value="">--None--</option><option value="Open">Open</option>
-<option value="Pending">Pending</option>
-<option value="Requires Attention">Requires Attention</option>
-<option value="Closed">Closed</option>
+Preferred Name:<input  id="00N0Y00000Ryl5a" maxlength="40" name="00N0Y00000Ryl5a" size="20" type="text" /><br>
+
+Referral Reason:<select  id="00N0Y00000Ryl5h" multiple="multiple" name="00N0Y00000Ryl5h" title="Referral Reason"><option value="Referral to social prescribing service">Referral to social prescribing service</option>
+<option value="Benefits">Benefits</option>
+<option value="Debt">Debt</option>
+<option value="Signposting">Signposting</option>
+<option value="Dementia">Dementia</option>
+<option value="Housing problem">Housing problem</option>
+<option value="Homeless">Homeless</option>
+<option value="Frail">Frail</option>
+<option value="Support for carer(s)">Support for carer(s)</option>
+<option value="Low mood">Low mood</option>
+<option value="Advice/Support with independent living">Advice/Support with independent living</option>
+<option value="Advice/Support managing at home">Advice/Support managing at home</option>
+<option value="Meeting new people">Meeting new people</option>
+<option value="Finding new interests/skills">Finding new interests/skills</option>
+<option value="Staying active">Staying active</option>
+<option value="Reduce isolation">Reduce isolation</option>
+<option value="Practising hobbies">Practising hobbies</option>
+<option value="Help to cope with bereavement">Help to cope with bereavement</option>
+<option value="Increase confidence">Increase confidence</option>
+<option value="My family wants me to take up service">My family wants me to take up service</option>
+<option value="Going on trips">Going on trips</option>
+<option value="Increase/Maintain independence">Increase/Maintain independence</option>
+<option value="Laundry">Laundry</option>
+<option value="Help with meal preparation">Help with meal preparation</option>
+<option value="Help with housework">Help with housework</option>
+<option value="Help with shopping">Help with shopping</option>
+<option value="Prepare home for discharge">Prepare home for discharge</option>
+<option value="Transport options">Transport options</option>
+<option value="Mobility support">Mobility support</option>
+<option value="Home maintenance">Home maintenance</option>
+<option value="Improve mental health">Improve mental health</option>
+<option value="Personal crisis">Personal crisis</option>
+<option value="Personal care">Personal care</option>
+<option value="Foot in the door - client refused other services">Foot in the door - client refused other services</option>
+<option value="Maximising income">Maximising income</option>
+<option value="Refugee/Asylum seeker">Refugee/Asylum seeker</option>
+<option value="Home repairs">Home repairs</option>
+<option value="Home safety">Home safety</option>
+<option value="Furniture assembly/removal">Furniture assembly/removal</option>
+<option value="Gardening">Gardening</option>
+<option value="Awaiting equipment deliveries">Awaiting equipment deliveries</option>
+<option value="Domestic (eg shopping, housework)">Domestic (eg shopping, housework)</option>
+<option value="Help with medical appointments">Help with medical appointments</option>
+<option value="Help arranging transport">Help arranging transport</option>
+<option value="Follow-up support after discharge">Follow-up support after discharge</option>
+<option value="Home Environment Check">Home Environment Check</option>
+<option value="KeySafe installation/repair">KeySafe installation/repair</option>
+<option value="IT support">IT support</option>
+<option value="Other">Other</option>
+<option value="Carers Identification Project">Carers Identification Project</option>
+<option value="Employment support">Employment support</option>
+<option value="House clearance / Deep clean">House clearance / Deep clean</option>
 </select><br>
 
-Hospital Reference Number (MRN/MRH):<input  id="00N07000000OHqv" maxlength="60" name="00N07000000OHqv" size="20" type="text" /><br>
+GPs Name and Address:<input  id="00N1v00000TFIWu" maxlength="255" name="00N1v00000TFIWu" size="20" type="text" /><br>
 
-<input type="submit" name="submit">
+Date of birth:<span class="dateInput dateOnlyInput"><input  id="00NQ600000GFCaj" name="00NQ600000GFCaj" size="12" type="text" /></span><br>
 
-</form>
+Data consent date:<span class="dateInput dateOnlyInput"><input  id="00NQ600000GFAqh" name="00NQ600000GFAqh" size="12" type="text" /></span><br>
+
+Data consent verbal:<select  id="00NQ600000GFCyv" name="00NQ600000GFCyv" title="Data consent verbal"><option value="">--None--</option><option value="Yes">Yes</option>
+<option value="No">No</option>
+</select><br>
+
+Data consent signed by patient:<select  id="00NQ600000GFDa1" name="00NQ600000GFDa1" title="Data consent signed by patient"><option value="">--None--</option><option value="Yes">Yes</option>
+<option value="No">No</option>
+</select><br>
+
+Referrer Name:<input  id="00NQ600000GFGHl" maxlength="155" name="00NQ600000GFGHl" size="20" type="text" /><br>
+
+Referrer Position:<input  id="00NQ600000GFGRR" maxlength="155" name="00NQ600000GFGRR" size="20" type="text" /><br>
+
+Referrer Hospital / Ward:<input  id="00NQ600000GFGcj" maxlength="155" name="00NQ600000GFGcj" size="20" type="text" /><br>
+
+Referrer Contact No / Bleep:<input  id="00NQ600000GFGhZ" maxlength="100" name="00NQ600000GFGhZ" size="20" type="text" /><br>
+
+Referrer Email:<input  id="00NQ600000GFGxh" maxlength="80" name="00NQ600000GFGxh" size="20" type="text" /><br>
+
+Living Arrangements:<select  id="00NQ600000GFHk5" name="00NQ600000GFHk5" title="Living Arrangements"><option value="">--None--</option><option value="Lives alone">Lives alone</option>
+<option value="Lives with spouse/partner">Lives with spouse/partner</option>
+<option value="Lives with family">Lives with family</option>
+<option value="Lives with friend/other">Lives with friend/other</option>
+<option value="Lives with carer">Lives with carer</option>
+<option value="Lives in care home">Lives in care home</option>
+<option value="Other">Other</option>
+<option value="Not stated">Not stated</option>
+</select><br>
+
+NOK Name:<input  id="00NQ600000GFI1p" maxlength="155" name="00NQ600000GFI1p" size="20" type="text" /><br>
+
+NOK Address:<textarea  id="00NQ600000GFID7" name="00NQ600000GFID7" type="text" wrap="soft"></textarea><br>
+
+NOK Phone:<input  id="00NQ600000GFIMn" maxlength="40" name="00NQ600000GFIMn" size="20" type="text" /><br>
+
+NOK Email:<input  id="00NQ600000GFGPs" maxlength="80" name="00NQ600000GFGPs" size="20" type="text" /><br>
+
+Warden Name:<input  id="00NQ600000GFIRd" maxlength="155" name="00NQ600000GFIRd" size="20" type="text" /><br>
+
+Warden Phone:<input  id="00NQ600000GFIWT" maxlength="50" name="00NQ600000GFIWT" size="20" type="text" /><br>
+
+Keyholders Name:<input  id="00NQ600000GFIjN" maxlength="155" name="00NQ600000GFIjN" size="20" type="text" /><br>
+
+Keyholders Phone:<input  id="00NQ600000GFIt3" maxlength="50" name="00NQ600000GFIt3" size="20" type="text" /><br>
+
+Neighbours Name:<input  id="00NQ600000GFIzV" maxlength="155" name="00NQ600000GFIzV" size="20" type="text" /><br>
+
+Neighbours Phone:<input  id="00NQ600000GFJ4L" maxlength="50" name="00NQ600000GFJ4L" size="20" type="text" /><br>
+
+Any informal support:<textarea  id="00NQ600000GFJCP" name="00NQ600000GFJCP" type="text" wrap="soft"></textarea><br>
+
+NHS Number:<input  id="00NQ600000GFJIr" maxlength="20" name="00NQ600000GFJIr" size="20" type="text" /><br>
+
+MRN/MRH Number:<input  id="00NQ600000GFEfn" maxlength="40" name="00NQ600000GFEfn" size="20" type="text" /><br>
+
+Ward:<select  id="00NQ600000GFJqj" name="00NQ600000GFJqj" title="Ward"><option value="">--None--</option><option value="Kennett">Kennett</option>
+<option value="Keats">Keats</option>
+<option value="Blythe">Blythe</option>
+<option value="Derwent">Derwent</option>
+<option value="Other">Other</option>
+</select><br>
+
+Other Ward:<input  id="00NQ600000GFB20" maxlength="50" name="00NQ600000GFB20" size="20" type="text" /><br>
+
+Bay Number:<input  id="00NQ600000GFHLv" name="00NQ600000GFHLv" size="20" type="text" /><br>
+
+Bed Number:<input  id="00NQ600000GFKJl" name="00NQ600000GFKJl" size="20" type="text" /><br>
+
+Reason for admission/date:<input  id="00NQ600000GFDN8" maxlength="255" name="00NQ600000GFDN8" size="20" type="text" /><br>
+
+Reason for referral EDD/urgency:<textarea  id="00NQ600000GFKTR" name="00NQ600000GFKTR" type="text" wrap="soft"></textarea><br>
+
+Health conditions:<textarea  id="00NQ600000GFIjO" name="00NQ600000GFIjO" rows="3" type="text" wrap="soft"></textarea><br>
+
+Shopping list:<textarea  id="00NQ600000GFKgL" name="00NQ600000GFKgL" rows="3" type="text" wrap="soft"></textarea><br>
+
+<input type="hidden"  id="lead_source" name="lead_source" value="Web" /><br>
+
+<div class="g-recaptcha" data-sitekey="6Lc1CA0uAAAAAJRPB3T8K7MrkDTRGoSv5o2vouyn"></div><br>
+
+        <!-- Submit Button styled to match -->
+        <input type="submit" name="submit" class="submit-btn" value="Submit Referral">
+
+    </form>
+</div>
+
+</body>
+</html>
